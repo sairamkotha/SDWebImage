@@ -204,7 +204,10 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageOptions) {
      * We usually don't apply transform on vector images, because vector images supports dynamically changing to any size, rasterize to a fixed size will loss details. To modify vector images, you can process the vector data at runtime (such as modifying PDF tag / SVG element).
      * Use this flag to transform them anyway.
      */
-    SDWebImageTransformVectorImage = 1 << 23
+    SDWebImageTransformVectorImage = 1 << 23,
+    
+    
+    SDWebImageNotToSetNoImageOnFailure = 1 << 24
 };
 
 
