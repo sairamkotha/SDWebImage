@@ -438,6 +438,9 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
 }
 
 - (void)sd_startImageIndicator {
+    if (![[SDImageCacheConfig defaultCacheConfig] showImageIndicator]) {
+        return;
+    }
     id<SDWebImageIndicator> imageIndicator = self.sd_imageIndicator;
     if (!imageIndicator) {
         return;
@@ -448,6 +451,9 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
 }
 
 - (void)sd_stopImageIndicator {
+    if (![[SDImageCacheConfig defaultCacheConfig] showImageIndicator]) {
+        return;
+    }
     id<SDWebImageIndicator> imageIndicator = self.sd_imageIndicator;
     if (!imageIndicator) {
         return;

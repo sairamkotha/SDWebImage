@@ -39,6 +39,7 @@ static const NSInteger kDefaultCacheMaxDiskAge = 60 * 60 * 24 * 7; // 1 week
         _ioQueueAttributes = DISPATCH_QUEUE_SERIAL; // NULL
         _memoryCacheClass = [SDMemoryCache class];
         _diskCacheClass = [SDDiskCache class];
+        _showImageIndicator = NO;
     }
     return self;
 }
