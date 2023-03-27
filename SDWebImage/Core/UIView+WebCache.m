@@ -174,6 +174,7 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
                 return;
             }
             
+#if SD_UIKIT || SD_MAC
             if(!image) {
                 self.contentMode = UIViewContentModeScaleAspectFit;
                 if (options & SDWebImageNotToSetNoImageOnFailure) {}
@@ -183,6 +184,7 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
                     [self sd_stopImageIndicator];
                 }
             }
+#endif
             
             UIImage *targetImage = nil;
             NSData *targetData = nil;
@@ -397,7 +399,11 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
 
 #pragma mark - Image Transition
 - (SDWebImageTransition *)sd_imageTransition {
-    return objc_getAssociatedObject(self, @selector(sd_imageTransition));
+    SDWebImageTransition *transistion = objc_getAssociatedObject(self, @selector(sd_imageTransition));
+    if (!transistion) {
+        return SDWebImageTransition.fadeTransition;
+    }
+    return transistion;
 }
 
 - (void)setSd_imageTransition:(SDWebImageTransition *)sd_imageTransition {
