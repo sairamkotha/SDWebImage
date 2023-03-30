@@ -412,10 +412,16 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
 
 #pragma mark - Indicator
 - (id<SDWebImageIndicator>)sd_imageIndicator {
+    if (![[SDImageCacheConfig defaultCacheConfig] showImageIndicator]) {
+        return nil;
+    }
     return objc_getAssociatedObject(self, @selector(sd_imageIndicator));
 }
 
 - (void)setSd_imageIndicator:(id<SDWebImageIndicator>)sd_imageIndicator {
+    if (![[SDImageCacheConfig defaultCacheConfig] showImageIndicator]) {
+        return;
+    }
     // Remove the old indicator view
     id<SDWebImageIndicator> previousIndicator = self.sd_imageIndicator;
     [previousIndicator.indicatorView removeFromSuperview];
@@ -451,9 +457,6 @@ const int64_t SDWebImageProgressUnitCountUnknown = 1LL;
 }
 
 - (void)sd_stopImageIndicator {
-    if (![[SDImageCacheConfig defaultCacheConfig] showImageIndicator]) {
-        return;
-    }
     id<SDWebImageIndicator> imageIndicator = self.sd_imageIndicator;
     if (!imageIndicator) {
         return;
